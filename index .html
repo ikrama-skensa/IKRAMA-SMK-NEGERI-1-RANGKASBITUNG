@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IKRAMA — Ikatan Remaja Masjid SMK Negeri 1 Rangkasbitung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal-950:#0C2C4A;
+    --teal-900:#123B60;
+    --teal-800:#1B4E7A;
+    --teal-700:#256393;
+    --gold-500:#E0A526;
+    --gold-300:#EFC763;
+    --gold-100:#FBEAC0;
+    --ivory-50:#FCF6E8;
+    --ivory-100:#F5E9C9;
+    --ink-900:#1C2420;
+    --ink-600:#544B3A;
+    --maroon-700:#B4282D;
+    --green-600:#3F8F52;
+    --line: rgba(224,165,38,0.35);
+    --radius-sm: 3px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ivory-50);
+    color:var(--ink-900);
+    font-family:'Manrope',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Amiri',serif;
+    font-weight:700;
+    color:var(--teal-950);
+    margin:0;
+  }
+  p{margin:0;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+  ::selection{background:var(--gold-300);color:var(--teal-950);}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:100;
+    padding:18px 0;
+  }
+  header.scrolled{
+    background:var(--ivory-50);
+    padding:12px 0;
+    box-shadow:0 1px 0 var(--line);
+  }
+  header .wrap{display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand-mark-box{
+    position:relative;
+    width:40px;height:40px;flex:none;
+  }
+  .brand-mark-img{
+    width:40px;height:40px;
+    object-fit:contain;
+    border-radius:6px;
+    display:block;
+  }
+  .brand-mark-fallback{
+    display:none;
+    position:absolute;top:0;left:0;
+    width:40px;height:40px;
+  }
+  .brand-text{display:flex;flex-direction:column;line-height:1.15;}
+  .brand-text strong{
+    font-family:'Amiri',serif;
+    font-size:1.15rem;
+    color:white;
+  }
+  header.scrolled .brand-text strong{color:var(--teal-950);}
+  .brand-text span{
+    font-size:.68rem;
+    letter-spacing:.02em;
+    color:gold;
+  }
+  header.scrolled .brand-text span{color:var(--teal-700);}
+
+  nav.links{display:flex;gap:30px;}
+  nav.links a{
+    font-size:.92rem;
+    font-weight:600;
+    color:var(--ivory-100);
+    position:relative;
+    padding:4px 0;
+    transition:color .35s ease;
+  }
+  header.scrolled nav.links a{color:var(--ink-900);}
+  nav.links a::after{
+    content:"";
+    position:absolute;left:0;bottom:0;
+    width:0;height:2px;
+    background:var(--gold-500);
+    transition:width .25s ease;
+  }
+  nav.links a:hover::after,nav.links a.active::after{width:100%;}
+
+  .nav-cta{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--gold-500);
+    color:var(--teal-950);
+    font-weight:700;
+    font-size:.88rem;
+    padding:10px 18px;
+    border-radius:var(--radius-sm);
+    border:1px solid var(--gold-500);
+    transition:background .25s ease, transform .15s ease;
+  }
+  .nav-cta:hover{background:var(--gold-300);transform:translateY(-1px);}
+
+  .burger{display:none;width:26px;height:20px;position:relative;cursor:pointer;background:none;border:0;padding:0;}
+  .burger span{
+    position:absolute;left:0;width:100%;height:2px;background:var(--ivory-100);
+    transition:.3s ease;
+  }
+  header.scrolled .burger span{background:var(--teal-950);}
+  .burger span:nth-child(1){top:0;}
+  .burger span:nth-child(2){top:9px;}
+  .burger span:nth-child(3){top:18px;}
+  .burger.open span:nth-child(1){transform:translateY(9px) rotate(45deg);}
+  .burger.open span:nth-child(2){opacity:0;}
+  .burger.open span:nth-child(3){transform:translateY(-9px) rotate(-45deg);}
+
+  .mobile-menu{
+    display:none;
+    position:fixed;inset:0;
+    background:var(--teal-950);
+    z-index:99;
+    padding:110px 28px 40px;
+    flex-direction:column;
+    gap:26px;
+  }
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{
+    font-family:'Amiri',serif;
+    font-size:1.6rem;
+    color:var(--ivory-50);
+    border-bottom:1px solid rgba(255,255,255,.1);
+    padding-bottom:16px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:var(--teal-950);
+    overflow:hidden;
+    padding:168px 0 120px;
+  }
+  .hero-pattern{
+    position:absolute;
+    top:-10%;right:-14%;
+    width:640px;height:640px;
+    opacity:.16;
+    pointer-events:none;
+  }
+  .hero-pattern-2{
+    position:absolute;
+    bottom:-18%;left:-10%;
+    width:420px;height:420px;
+    opacity:.10;
+    pointer-events:none;
+  }
+  .hero .wrap{position:relative;z-index:2;}
+  .hero-logo{
+    width:72px;height:72px;
+    object-fit:contain;
+    margin-bottom:22px;
+    opacity:0;
+    animation:fadeUp .7s ease 0s forwards;
+  }
+  .hero-eyebrow{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:26px;
+    opacity:0;
+    animation:fadeUp .7s ease .1s forwards;
+  }
+  .hero-eyebrow .rule{width:40px;height:1px;background:var(--gold-500);}
+  .hero-eyebrow span{
+    color:var(--gold-300);
+    font-size:.85rem;
+    font-weight:600;
+    letter-spacing:.02em;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem,6vw,4.4rem);
+    color:var(--ivory-50);
+    max-width:820px;
+    line-height:1.12;
+    opacity:0;
+    animation:fadeUp .8s ease .25s forwards;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--gold-300);
+  }
+  .hero-sub{
+    max-width:520px;
+    margin-top:26px;
+    color:var(--ivory-100);
+    font-size:1.05rem;
+    opacity:0;
+    animation:fadeUp .8s ease .4s forwards;
+  }
+  .hero-actions{
+    display:flex;
+    gap:16px;
+    margin-top:44px;
+    flex-wrap:wrap;
+    opacity:0;
+    animation:fadeUp .8s ease .55s forwards;
+  }
+  .btn-primary{
+    background:var(--gold-500);
+    color:var(--teal-950);
+    font-weight:700;
+    padding:15px 28px;
+    border-radius:var(--radius-sm);
+    font-size:.95rem;
+    transition:background .25s ease, transform .15s ease;
+  }
+  .btn-primary:hover{background:var(--gold-300);transform:translateY(-2px);}
+  .btn-ghost{
+    border:1px solid rgba(250,246,236,.35);
+    color:var(--ivory-50);
+    padding:15px 28px;
+    border-radius:var(--radius-sm);
+    font-weight:600;
+    font-size:.95rem;
+    transition:border-color .25s ease, background .25s ease;
+  }
+  .btn-ghost:hover{border-color:var(--gold-500);background:rgba(250,246,236,.06);}
+
+  .hero-stats{
+    display:grid;
+    grid-template-columns:repeat(3,auto);
+    gap:48px;
+    margin-top:76px;
+    padding-top:32px;
+    border-top:1px solid rgba(250,246,236,.14);
+    max-width:620px;
+    opacity:0;
+    animation:fadeUp .8s ease .7s forwards;
+  }
+  .hero-stats div strong{
+    display:block;
+    font-family:'Amiri',serif;
+    font-size:2rem;
+    color:var(--gold-300);
+  }
+  .hero-stats div span{
+    font-size:.82rem;
+    color:var(--ivory-100);
+  }
+
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(16px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero-eyebrow,.hero h1,.hero-sub,.hero-actions,.hero-stats{animation:none;opacity:1;}
+  }
+
+  /* ---------- SECTION GENERAL ---------- */
+  section{padding:110px 0;}
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:40px;
+    margin-bottom:56px;
+    flex-wrap:wrap;
+  }
+  .section-head .kicker{
+    display:flex;align-items:center;gap:12px;margin-bottom:14px;
+  }
+  .section-head .kicker .rule{width:32px;height:1px;background:var(--maroon-700);}
+  .section-head .kicker span{
+    color:var(--maroon-700);
+    font-weight:700;
+    font-size:.85rem;
+  }
+  .section-head h2{
+    font-size:clamp(1.9rem,3.4vw,2.6rem);
+    max-width:560px;
+    line-height:1.2;
+  }
+  .section-head p{
+    max-width:340px;
+    color:var(--ink-600);
+    font-size:.98rem;
+  }
+
+  /* ---------- TENTANG ---------- */
+  .about{background:var(--ivory-50);}
+  .about-grid{
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:70px;
+    align-items:start;
+  }
+  .about-lead{
+    font-family:'Amiri',serif;
+    font-size:1.5rem;
+    line-height:1.55;
+    color:var(--teal-950);
+  }
+  .about-body{
+    margin-top:28px;
+    color:var(--ink-600);
+    font-size:1rem;
+  }
+  .about-body + .about-body{margin-top:16px;}
+  .about-panel{
+    background:var(--teal-950);
+    border-radius:var(--radius-sm);
+    padding:40px 34px;
+    position:relative;
+    overflow:hidden;
+  }
+  .about-panel .hero-pattern-2{
+    top:-30%;right:-30%;left:auto;bottom:auto;
+    width:260px;height:260px;
+    opacity:.14;
+  }
+  .about-panel h3{
+    color:var(--gold-300);
+    font-size:1.3rem;
+    position:relative;
+    z-index:1;
+  }
+  .about-list{
+    list-style:none;
+    padding:0;margin:22px 0 0;
+    position:relative;z-index:1;
+  }
+  .about-list li{
+    display:flex;
+    gap:14px;
+    padding:14px 0;
+    border-top:1px solid rgba(250,246,236,.12);
+    color:var(--ivory-100);
+    font-size:.94rem;
+  }
+  .about-list li:first-child{border-top:none;}
+  .about-list li b{color:var(--gold-300);font-weight:700;}
+
+  .sejarah-timeline{
+    display:flex;
+    flex-direction:column;
+    margin-top:32px;
+    padding-top:28px;
+    border-top:1px solid var(--line);
+  }
+  .sejarah-item{
+    position:relative;
+    border-left:2px solid var(--gold-500);
+    padding:0 0 30px 22px;
+  }
+  .sejarah-item:last-child{padding-bottom:0;}
+  .sejarah-item::before{
+    content:"";
+    position:absolute;
+    left:-6px;top:2px;
+    width:10px;height:10px;
+    border-radius:50%;
+    background:var(--gold-500);
+  }
+  .sejarah-year{
+    display:block;
+    font-family:'Amiri',serif;
+    font-weight:700;
+    color:var(--maroon-700);
+    font-size:1.05rem;
+    margin-bottom:8px;
+  }
+  .sejarah-item p{color:var(--ink-600);font-size:.92rem;line-height:1.65;max-width:640px;}
+
+
+  /* ---------- VISI MISI ---------- */
+  .vm{background:var(--ivory-100);}
+  .vm-grid{
+    display:grid;
+    grid-template-columns:.9fr 1.1fr;
+    gap:70px;
+  }
+  .vm-visi{
+    border-left:2px solid var(--gold-500);
+    padding-left:28px;
+  }
+  .vm-visi .kicker{color:var(--maroon-700);font-weight:700;font-size:.85rem;margin-bottom:14px;display:block;}
+  .vm-visi p{
+    font-family:'Amiri',serif;
+    font-size:1.4rem;
+    color:var(--teal-950);
+    line-height:1.5;
+  }
+  .misi-item{
+    display:grid;
+    grid-template-columns:44px 1fr;
+    gap:20px;
+    padding:22px 0;
+    border-top:1px solid var(--line);
+  }
+  .misi-item:last-child{border-bottom:1px solid var(--line);}
+  .misi-num{
+    font-family:'Amiri',serif;
+    font-size:1.6rem;
+    color:var(--gold-500);
+  }
+  .misi-item h4{
+    font-family:'Manrope',sans-serif;
+    font-weight:700;
+    font-size:1.02rem;
+    color:var(--teal-950);
+    margin-bottom:6px;
+  }
+  .misi-item p{color:var(--ink-600);font-size:.94rem;}
+
+  /* ---------- PROGRAM ---------- */
+  .program{background:var(--ivory-50);}
+  .program-row{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    gap:40px;
+    padding:34px 0;
+    border-top:1px solid var(--line);
+    align-items:start;
+  }
+  .program-row:last-child{border-bottom:1px solid var(--line);}
+  .program-tag{
+    font-family:'Amiri',serif;
+    font-size:1.3rem;
+    color:var(--teal-950);
+  }
+  .program-tag span{
+    display:block;
+    font-family:'Manrope',sans-serif;
+    font-size:.78rem;
+    color:var(--maroon-700);
+    font-weight:700;
+    margin-top:6px;
+  }
+  .program-detail h4{
+    font-size:1.08rem;
+    color:var(--ink-900);
+    font-weight:700;
+    margin-bottom:8px;
+  }
+  .program-detail p{color:var(--ink-600);font-size:.96rem;max-width:640px;}
+  .program-icon{
+    width:30px;height:30px;
+    display:inline-block;
+    vertical-align:middle;
+    margin-right:8px;
+  }
+
+  /* ---------- STRUKTUR ---------- */
+  .struktur{background:var(--teal-950);color:var(--ivory-50);position:relative;overflow:hidden;}
+  .struktur .hero-pattern{opacity:.08;top:-20%;right:-16%;}
+  .struktur .section-head h2{color:var(--ivory-50);}
+  .struktur .section-head p{color:var(--ivory-100);}
+  .struktur .kicker span{color:var(--gold-300);}
+  .struktur .kicker .rule{background:var(--gold-300);}
+  .org-chart{position:relative;z-index:1;}
+  .org-tier{
+    display:flex;
+    justify-content:center;
+    gap:24px;
+    flex-wrap:wrap;
+    margin-bottom:24px;
+  }
+  .org-card{
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(180deg, var(--teal-800) 0%, var(--teal-950) 78%);
+    padding:0 0 20px;
+    text-align:center;
+    width:196px;
+  }
+  .org-photo{
+    width:calc(100% - 24px);
+    margin:20px auto 0;
+  }
+  .org-photo img{
+    width:100%;
+    height:auto;
+    display:block;
+    object-fit:contain;
+    background:transparent;
+  }
+  .org-card b{
+    display:block;
+    position:relative;z-index:2;
+    background:var(--gold-500);
+    color:var(--teal-950);
+    font-family:'Amiri',serif;
+    font-weight:700;
+    font-size:.9rem;
+    letter-spacing:.01em;
+    padding:9px 12px;
+    margin-top:18px;
+  }
+  .org-name{
+    display:block;
+    position:relative;z-index:2;
+    font-family:'Manrope',sans-serif;
+    font-weight:700;
+    font-size:.86rem;
+    color:var(--ivory-50);
+    margin-top:12px;
+    padding:0 10px;
+  }
+  .org-id{
+    display:block;
+    position:relative;z-index:2;
+    font-size:.72rem;
+    color:var(--ivory-100);
+    opacity:.75;
+    margin-top:6px;
+    letter-spacing:.01em;
+  }
+  .org-note{
+    margin-top:30px;
+    font-size:.82rem;
+    color:var(--ivory-100);
+    opacity:.7;
+    text-align:center;
+  }
+
+  /* ---------- AGENDA ---------- */
+  .agenda{background:var(--ivory-100);}
+  .agenda-list{border-top:1px solid var(--line);}
+  .agenda-item{
+    display:grid;
+    grid-template-columns:110px 1fr auto;
+    gap:24px;
+    align-items:center;
+    padding:24px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .agenda-date{
+    font-family:'Amiri',serif;
+    color:var(--maroon-700);
+  }
+  .agenda-date strong{display:block;font-size:1.5rem;color:var(--teal-950);}
+  .agenda-date span{font-size:.78rem;}
+  .agenda-title h4{font-size:1rem;font-weight:700;color:var(--ink-900);margin-bottom:4px;}
+  .agenda-title p{font-size:.88rem;color:var(--ink-600);}
+  .agenda-place{
+    font-size:.82rem;
+    color:var(--teal-700);
+    font-weight:600;
+    text-align:right;
+    white-space:nowrap;
+  }
+
+  /* ---------- GALERI ---------- */
+  .galeri{background:var(--ivory-50);}
+  .gal-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:2px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .gal-cell{
+    background:var(--teal-900);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    gap:8px;
+    padding:22px 16px;
+    text-align:center;
+    position:relative;
+    min-height:170px;
+  }
+  .gal-cell:nth-child(3n+1){background:var(--teal-800);}
+  .gal-cell:nth-child(5n+2){background:var(--maroon-700);}
+  .gal-cell svg{width:34px;height:34px;opacity:.9;}
+  .gal-cell span{
+    color:var(--ivory-100);
+    font-size:.78rem;
+    font-weight:700;
+  }
+  .gal-cell p{
+    color:var(--ivory-100);
+    opacity:.75;
+    font-size:.72rem;
+    line-height:1.45;
+    margin-top:2px;
+  }
+  .gal-note{
+    margin-top:18px;
+    font-size:.86rem;
+    color:var(--ink-600);
+  }
+
+  /* ---------- GABUNG / KONTAK ---------- */
+  .join{background:var(--teal-950);color:var(--ivory-50);position:relative;overflow:hidden;}
+  .join .hero-pattern-2{opacity:.1;left:-14%;bottom:-24%;}
+  .join-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    position:relative;z-index:1;
+  }
+  .join h2{color:var(--ivory-50);font-size:clamp(1.9rem,3.4vw,2.5rem);margin-bottom:20px;}
+  .join p.lead{color:var(--ivory-100);max-width:420px;margin-bottom:34px;}
+  .join-steps{list-style:none;padding:0;margin:0;}
+  .join-steps li{
+    display:flex;
+    gap:16px;
+    padding:16px 0;
+    border-top:1px solid rgba(250,246,236,.12);
+    font-size:.94rem;
+    color:var(--ivory-100);
+  }
+  .join-steps li b{color:var(--gold-300);font-family:'Amiri',serif;font-size:1.1rem;}
+
+  form.contact{
+    background:var(--ivory-50);
+    border-radius:var(--radius-sm);
+    padding:34px;
+  }
+  form.contact h3{color:var(--teal-950);font-size:1.2rem;margin-bottom:22px;}
+  .field{margin-bottom:18px;}
+  .field label{
+    display:block;
+    font-size:.8rem;
+    font-weight:700;
+    color:var(--teal-950);
+    margin-bottom:6px;
+  }
+  .field input,.field select,.field textarea{
+    width:100%;
+    border:1px solid rgba(27,33,30,.2);
+    border-radius:var(--radius-sm);
+    padding:11px 13px;
+    font-family:'Manrope',sans-serif;
+    font-size:.92rem;
+    background:#fff;
+    color:var(--ink-900);
+  }
+  .field textarea{resize:vertical;min-height:80px;}
+  .field input:focus,.field select:focus,.field textarea:focus{
+    outline:2px solid var(--gold-500);
+    outline-offset:1px;
+  }
+  .submit-btn{
+    width:100%;
+    background:var(--maroon-700);
+    color:var(--ivory-50);
+    border:none;
+    padding:14px;
+    border-radius:var(--radius-sm);
+    font-weight:700;
+    font-size:.95rem;
+    cursor:pointer;
+    transition:background .25s ease;
+  }
+  .submit-btn:hover{background:#5f221e;}
+  .form-note{font-size:.78rem;color:var(--ink-600);margin-top:12px;text-align:center;}
+
+  /* ---------- FOOTER ---------- */
+  /* ---------- COVER PENUTUP ---------- */
+  .penutup{
+    background:var(--teal-950);
+    position:relative;
+    overflow:hidden;
+    padding:100px 0;
+    text-align:center;
+  }
+  .penutup-content{
+    position:relative;z-index:1;
+    max-width:640px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .penutup-logo{
+    width:96px;height:96px;
+    object-fit:contain;
+    margin-bottom:24px;
+  }
+  .penutup-arabic{
+    font-family:'Amiri',serif;
+    font-size:1.4rem;
+    color:var(--gold-300);
+    margin-bottom:18px;
+    direction:rtl;
+  }
+  .penutup h2{
+    color:var(--ivory-50);
+    font-size:clamp(1.6rem,3.2vw,2.2rem);
+    line-height:1.4;
+    margin-bottom:20px;
+  }
+  .penutup-sub{
+    color:var(--ivory-100);
+    font-size:.98rem;
+    line-height:1.7;
+    margin-bottom:34px;
+  }
+
+  footer{background:var(--teal-900);color:var(--ivory-100);padding:56px 0 28px;}
+  .foot-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr;
+    gap:50px;
+    padding-bottom:36px;
+    border-bottom:1px solid rgba(250,246,236,.14);
+  }
+  .foot-brand strong{font-family:'Amiri',serif;color:var(--ivory-50);font-size:1.2rem;display:block;margin-bottom:10px;}
+  .foot-brand p{font-size:.88rem;color:var(--ivory-100);max-width:280px;}
+  footer h5{font-size:.82rem;color:var(--gold-300);font-weight:700;margin-bottom:16px;}
+  footer ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
+  footer ul a{font-size:.88rem;color:var(--ivory-100);}
+  footer ul a:hover{color:var(--gold-300);}
+  .foot-bottom{
+    display:flex;justify-content:space-between;align-items:center;
+    padding-top:24px;flex-wrap:wrap;gap:10px;
+    font-size:.78rem;color:rgba(250,246,236,.5);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:860px){
+    nav.links,.nav-cta{display:none;}
+    .burger{display:block;}
+    .about-grid,.vm-grid,.join-grid,.foot-grid{grid-template-columns:1fr;gap:44px;}
+    .program-row{grid-template-columns:1fr;gap:12px;}
+    .gal-grid{grid-template-columns:repeat(2,1fr);}
+    .agenda-item{grid-template-columns:1fr;text-align:left;gap:8px;}
+    .agenda-place{text-align:left;}
+    .hero-stats{grid-template-columns:repeat(3,auto);gap:26px;}
+  }
+  @media (max-width:500px){
+    section{padding:76px 0;}
+    .hero{padding:140px 0 90px;}
+    .hero-stats{grid-template-columns:1fr 1fr;}
+  }
+  a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
+    outline:2px solid var(--gold-500);outline-offset:2px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header id="siteHeader">
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <span class="brand-mark-box">
+      <img src="photo/Logo Ikrama.png" alt="Logo Ikrama" class="brand-mark-img" id="brandLogoImg" onerror="this.style.display='none';document.getElementById('brandLogoFallback').style.display='block';">
+        <svg class="brand-mark-fallback" id="brandLogoFallback" viewBox="0 0 40 40" fill="none">
+          <rect x="8" y="8" width="24" height="24" stroke="#E0A526" stroke-width="1.4" transform="rotate(0 20 20)"/>
+          <rect x="8" y="8" width="24" height="24" stroke="#E0A526" stroke-width="1.4" transform="rotate(45 20 20)"/>
+        </svg>
+      </span>
+      <span class="brand-text"><strong>IKRAMA</strong><span>SMKN 1 Rangkasbitung</span></span>
+    </a>
+    <nav class="links">
+      <a href="#tentang">Sejarah</a>
+      <a href="#struktur">Struktur</a>
+      <a href="#visi-misi">Visi &amp; Misi</a>
+      <a href="#program">Program</a>
+      <a href="#agenda">Kegiatan</a>
+      <a href="#galeri">Galeri</a>
+    </nav>
+    <a href="#gabung" class="nav-cta">Formulir pendaftaran</a>
+    <button class="burger" id="burgerBtn" aria-label="Buka menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#tentang">Sejarah</a>
+  <a href="#struktur">Struktur</a>
+  <a href="#visi-misi">Visi &amp; Misi</a>
+  <a href="#program">Program</a>
+  <a href="#agenda">Kegiatan</a>
+  <a href="#galeri">Galeri</a>
+  <a href="#gabung">Formulir</a>
+</div>
+
+<!-- ================= HERO ================= -->
+<div id="top"></div>
+<section class="hero">
+  <svg class="hero-pattern" viewBox="0 0 200 200" fill="none">
+    <g stroke="#E0A526" stroke-width="1">
+      <rect x="40" y="40" width="120" height="120" transform="rotate(0 100 100)"/>
+      <rect x="40" y="40" width="120" height="120" transform="rotate(22.5 100 100)"/>
+      <rect x="40" y="40" width="120" height="120" transform="rotate(45 100 100)"/>
+    </g>
+  </svg>
+  <svg class="hero-pattern-2" viewBox="0 0 200 200" fill="none">
+    <g stroke="#EFC763" stroke-width="1">
+      <rect x="50" y="50" width="100" height="100" transform="rotate(0 100 100)"/>
+      <rect x="50" y="50" width="100" height="100" transform="rotate(45 100 100)"/>
+    </g>
+  </svg>
+  <div class="wrap">
+    <img src="photo/Logo Ikrama.png" alt="Logo Ikrama" class="hero-logo" id="heroLogoImg" onerror="this.style.display='none';">
+    <div class="hero-eyebrow"><span class="rule"></span><span>Ikatan Remaja Masjid — SMK Negeri 1 Rangkasbitung</span></div>
+    <h1>Merawat masjid,<br>membina generasi <em>yang bertakwa</em>.</h1>
+    <p class="hero-sub">IKRAMA adalah wadah bagi siswa-siswi SMKN 1 Rangkasbitung untuk belajar, beribadah, dan berkarya bersama di lingkungan masjid sekolah — dari kajian rutin hingga bakti sosial.</p>
+    <div class="hero-actions">
+      <a href="#gabung" class="btn-primary">Gabung Sekarang</a>
+      <a href="#program" class="btn-ghost">Lihat Program Kegiatan</a>
+    </div>
+    <div class="hero-stats">
+      <div><strong id="statAnggota">-</strong><span>Anggota aktif</span></div>
+      <div><strong id="statKegiatan">-</strong><span>Kegiatan per tahun</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SEJARAH & TENTANG ================= -->
+<section class="about" id="tentang">
+  <div class="wrap about-grid">
+    <div>
+      <div class="section-head" style="margin-bottom:0;">
+        <div>
+          <div class="kicker"><span class="rule"></span><span>Sejarah &amp; Tentang Kami</span></div>
+          <h2>Perjalanan merawat masjid,<br>membina generasi bertakwa.</h2>
+        </div>
+      </div>
+      <p class="about-lead" style="margin-top:28px;">"Bersama Ikrama Membangun Generasi Beriman, Berilmu, dan Berakhlak Mulia."</p>
+      <p class="about-body">IKRAMA (Ikatan Remaja Masjid) lahir dari kesadaran bahwa masjid sekolah membutuhkan penggerak muda yang merawat, memakmurkan, dan menghidupkannya setiap hari. Berawal dari sekelompok kecil siswa yang aktif mengurus kebersihan dan kegiatan ibadah di Masjid Al-Ikhlas, semangat itu tumbuh menjadi wadah ekstrakurikuler resmi di SMK Negeri 1 Rangkasbitung.</p>
+      <p class="about-body">Sejak berdiri, IKRAMA terus berkembang — dari sekadar mengoordinasi sholat berjamaah, menjadi organisasi yang menaungi kajian rutin, tahsin Al-Qur'an, peringatan hari besar Islam, hingga kegiatan sosial kemasyarakatan. Setiap generasi pengurus mewariskan semangat yang sama: menjadikan masjid sebagai pusat pembentukan karakter siswa.</p>
+      <div class="sejarah-timeline">
+        <div class="sejarah-item"><span class="sejarah-year">Awal Berdiri</span><p>IKRAMA didirikan pada bulan Agustus tahun 1995 di Masjid Al-Ikhlas SMK Negeri 1 Rangkasbitung. Yang di bina langsung oleh DKM Masjid Al-Ikhlas dan Kesiswaan SMKN 1 Rangkasbitung.</p></div>
+        <div class="sejarah-item"><span class="sejarah-year">Berkembang</span><p>IKRAMA (Ikatan Remaja Masjid Al Ikhlas SMKN 1 Rangkasbitung) yang bersekertariat di SMKN 1 Rangkasbitung. Pada saat ini di tahun angkatan 2026/2027 telah terjadi pergantian kekhalifahan di sini. Dan untuk angkatan 2026/2027 di ketuai oleh akhi Muhamad Ismail Sumantri. Tetap Istiqomah dalam berdakwah dan jaga selalu Ukhuwah Islamiyah, untuk mencapai Mardhotillah....</p></div>
+        <div class="sejarah-item"><span class="sejarah-year">Sekarang</span><p>Menjadi ekstrakurikuler keagamaan aktif dengan struktur kepengurusan penuh.</p></div>
+      </div>
+      <p class="about-body">IKRAMA (Ikatan Remaja Masjid) adalah organisasi ekstrakurikuler keagamaan di SMK Negeri 1 Rangkasbitung yang menjadi wadah bagi siswa untuk memakmurkan masjid sekolah melalui kegiatan ibadah, dakwah, dan kepedulian sosial.</p>
+    </div>
+    <div class="about-panel">
+      <svg class="hero-pattern-2" viewBox="0 0 200 200" fill="none">
+        <g stroke="#EFC763" stroke-width="1">
+          <rect x="50" y="50" width="100" height="100" transform="rotate(0 100 100)"/>
+          <rect x="50" y="50" width="100" height="100" transform="rotate(45 100 100)"/>
+        </g>
+      </svg>
+      <h3>Nilai yang kami pegang</h3>
+      <ul class="about-list">
+        <li><b>Ukhuwah</b> — mempererat persaudaraan antarsiswa lintas jurusan dan angkatan.</li>
+        <li><b>Istiqomah</b> — konsisten menjaga ibadah di tengah kesibukan sekolah.</li>
+        <li><b>Kepedulian</b> — hadir untuk sesama lewat aksi sosial dan kepedulian lingkungan.</li>
+        <li><b>Kepemimpinan</b> — melatih tanggung jawab lewat organisasi dan kepanitiaan.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STRUKTUR ================= -->
+<section class="struktur" id="struktur">
+  <svg class="hero-pattern" viewBox="0 0 200 200" fill="none">
+    <g stroke="#EFC763" stroke-width="1">
+      <rect x="40" y="40" width="120" height="120" transform="rotate(0 100 100)"/>
+      <rect x="40" y="40" width="120" height="120" transform="rotate(45 100 100)"/>
+    </g>
+  </svg>
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="kicker"><span class="rule"></span><span>Struktur Organisasi</span></div>
+        <h2>Kepengurusan IKRAMA periode 2026-2027</h2>
+      </div>
+      <p>Dibina langsung oleh DKM Masjid Al-Ikhlas dan Kesiswaan SMKN 1 Rangkasbitung.</p>
+    </div>
+    <div class="org-chart">
+      <div class="org-tier">
+        <div class="org-card lead">
+          <div class="org-photo"><img src="https://drive.google.com/file/d/19NWMDdwBO8CwtL5_l-nL5A3ZiypcgpDf/view?usp=sharing" alt="Foto Kepala Sekolah" onerror="handlePhotoError(this)"></div>
+          <b>Kepala Sekolah</b>
+          <span class="org-name">Dr. Edi Ruslani, S.E., M.M</span>
+          <span class="org-id">NIP: 197404272007011012 </span>
+        </div>
+      </div>
+      <div class="org-tier">
+        <div class="org-card lead">
+          <div class="org-photo"><img src="https://drive.google.com/file/d/1Hfzxg3jZ2l2ao1qSBr_yNPTyMbUjJnkb/view?usp=sharing" alt="Foto Pembina" onerror="handlePhotoError(this)"></div>
+          <b>Pembina Umum</b>
+          <span class="org-name">SURYADI, M.Pd</span>
+          <span class="org-id">NIP: 1993020205211042 </span>
+        </div>
+      </div>
+      <div class="org-tier">
+        <div class="org-card lead">
+          <div class="org-photo"><img src="https://drive.google.com/file/d/1Wiq-GfMhHe95BpB-dcUOsuvlDteRRL-W/view?usp=sharing" alt="Foto Ketua Umum" onerror="handlePhotoError(this)"></div>
+          <b>Ketua Umum</b>
+          <span class="org-name">Muhamad Ismail S</span>
+          <span class="org-id">NIS: 25260238</span>
+        </div>
+      </div>
+      <div class="org-tier">
+        <div class="org-card">
+          <div class="org-photo"><img src="foto/wakil-ketua.jpg" alt="Foto Wakil Ketua" onerror="handlePhotoError(this)"></div>
+          <b>Wakil Ketua</b>
+          <span class="org-name">M. ZHOFRAN HAIDAR </span>
+          <span class="org-id">NIS: 25260278</span>
+        </div>
+        <div class="org-card">
+          <div class="org-photo"><img src="foto/sekretaris.jpg" alt="Foto Sekretaris" onerror="handlePhotoError(this)"></div>
+          <b>Sekretaris</b>
+          <span class="org-name">Nuria Silva</span>
+          <span class="org-id">NIS: 25260094</span>
+        </div>
+        <div class="org-card">
+          <div class="org-photo"><img src="foto/Bendahara.jpg" alt="Foto Bendahara" onerror="handlePhotoError(this)"></div>
+          <b>Bendahara</b>
+          <span class="org-name"> Nona Ades R</span>
+          <span class="org-id">NIS: 25260093</span>
+        </div>
+      </div>
+      <div class="org-tier">
+        <div class="org-card">
+          <div class="org-photo"><img src="foto/departemen 1.jpg" alt="Foto Ketua departemen 1" onerror="handlePhotoError(this)"></div>
+          <b>Ketua departemen 1</b>
+          <span class="org-name">..............</span>
+          <span class="org-id">NIS: ..........</span>
+        </div>
+        <div class="org-card">
+          <div class="org-photo"><img src="foto/departemen 2.jpg" alt="Foto Ketua departemen 2" onerror="handlePhotoError(this)"></div>
+          <b>Ketua departemen 2</b>
+          <span class="org-name">..............</span>
+          <span class="org-id">NIS: ..........</span>
+        </div>
+        <div class="org-card">
+          <div class="org-photo"><img src="foto/departemen 3.jpg" alt="Foto Ketua departemen 3" onerror="handlePhotoError(this)"></div>
+          <b>Ketua departemen 3</b>
+          <span class="org-name">..............</span>
+          <span class="org-id">NIS: ..........</span>
+        </div>
+        <div class="org-card">
+          <div class="org-photo"><img src="foto/departemen 4.jpg" alt="Foto Ketua departemen 4" onerror="handlePhotoError(this)"></div>
+          <b>Ketua departemen 4</b>
+          <span class="org-name">..............</span>
+          <span class="org-id">NIS: ..........</span>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VISI MISI ================= -->
+<section class="vm" id="visi-misi">
+  <div class="wrap vm-grid">
+    <div class="vm-visi">
+      <span class="kicker">Visi</span>
+      <p>Terwujudnya generasi pelajar muslim SMKN 1 Rangkasbitung yang beriman, bertakwa, berakhlak mulia, cerdas, serta aktif dalam memakmurkan masjid dan mempererat ukhuwah Islamiyah di lingkungan sekolah.</p>
+    </div>
+    <div>
+      <div class="kicker" style="margin-bottom:20px;"><span class="rule" style="background:var(--maroon-700);"></span><span style="color:var(--maroon-700);font-weight:700;font-size:.85rem;">Misi</span></div>
+      <div class="misi-item">
+        <span class="misi-num">1</span>
+        <div><h4>Meningkatkan Keimanan dan Ketakwaan</h4><p>Mengadakan kegiatan ibadah, kajian keislaman, dan pembinaan rohani secara rutin bagi seluruh anggota dan siswa sekolah.</p></div>
+      </div>
+      <div class="misi-item">
+        <span class="misi-num">2</span>
+        <div><h4>Memakmurkan Masjid Al-Ikhlas</h4><p>Mengelola, memelihara kebersihan, serta meramaikan Masjid Al-Ikhlas sebagai pusat kegiatan keagamaan dan pembentukan karakter siswa.</p></div>
+      </div>
+      <div class="misi-item">
+        <span class="misi-num">3</span>
+        <div><h4>Membentuk Karakter Berakhlakul Karimah</h4><p>Menanamkan nilai-nilai kejujuran, kedisiplinan, sopan santun, dan kepedulian sosial dalam kehidupan sehari-hari.</p></div>
+      </div>
+      <div class="misi-item">
+        <span class="misi-num">4</span>
+        <div><h4>Mengembangkan Bakat dan Potensi Islami</h4><p>Memfasilitasi minat serta bakat siswa di bidang seni dan syiar Islam (seperti marawis, hadroh, tilawatil Qur'an, dan da'i remaja).</p></div>
+      </div>
+      <div class="misi-item">
+        <span class="misi-num">5</span>
+        <div><h4>Menjalin dan Mempererat Ukhuwah Islamiyah</h4><p>Membangun tali silaturahmi yang erat antaranggota, antarekstrakurikuler, warga sekolah, serta organisasi remaja masjid luar.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROGRAM ================= -->
+<section class="program" id="program">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="kicker"><span class="rule"></span><span>Program Kerja</span></div>
+        <h2>Program kerja rutin dan tahunan IKRAMA</h2>
+      </div>
+      <p>Rangkaian program yang menopang pembinaan ibadah, ilmu, dan kepedulian sosial anggota.</p>
+    </div>
+
+    <div class="program-row">
+      <div class="program-tag">Setiap Hari<span>RUTIN HARIAN</span></div>
+      <div class="program-detail">
+        <h4>Sholat Dzuhur &amp; Ashar Berjamaah</h4>
+        <p>Menghimbau untuk melakukan sholat berjamaah di masjid sekolah.</p>
+      </div>
+    </div>
+    <div class="program-row">
+      <div class="program-tag">Mingguan<span>TA'LIM</span></div>
+      <div class="program-detail">
+        <h4>TA'LIM, Sholat Jumat, Jum'at Bersih &amp; Jum'at Shodaqoh</h4>
+        <p>Seluruh anggota serta pengurus mengikuti kegiatan ta'lim mingguan, di bawakan oleh pembina atau ustadz tamu.</p>
+        <p>Seluruh siswa & guru mengikuti sholat jumat berjamaah.</p>
+        <p>Seluruh anggota, pengurus dan perwakilan kelasmembersihkan masjid sekolah.</p>
+        <p>Seluruh anggota, pengurus mengumpulkan sedekah dari seluruh siswa dan guru.</p>
+      </div>
+    </div>
+    <div class="program-row">
+      <div class="program-tag">Setiap Bulan<span>KAJIAN</span></div>
+      <div class="program-detail">
+        <h4>Kajian Bulanan</h4>
+        <p>Kajian singkat seputar akhlak, fiqih sehari-hari, dan kisah teladan yang dibawakan oleh guru atau ustadz tamu.</p>
+      </div>
+    </div>
+    <div class="program-row">
+      <div class="program-tag">Tahunan<span>PHBI</span></div>
+      <div class="program-detail">
+        <h4>Peringatan Hari Besar Islam</h4>
+        <p>Menyelenggarakan acara Maulid Nabi, Isra Mi'raj, Ramadan, dan Idul Adha bersama seluruh warga sekolah.</p>
+      </div>
+    </div>
+    <div class="program-row">
+      <div class="program-tag">Tahunan<span>MABIT</span></div>
+      <div class="program-detail">
+        <h4>Malam Bina Iman dan Takwa</h4>
+        <p>Kegiatan menginap di masjid berisi qiyamul lail, muhasabah diri, dan penguatan ukhuwah antar anggota.</p>
+      </div>
+    </div>
+    <div class="program-row">
+      <div class="program-tag">Tahunan<span>Rihlah</span></div>
+      <div class="program-detail">
+        <h4>Mengunjungi tempat tempat bersejarah dan tempat keagamaan</h4>
+        <p>Kegiatan di luar sekolah untuk memperkaya pengetahuan dan pengalaman anggota.</p>
+      </div>
+    </div>
+    <div class="program-row">
+      <div class="program-tag">Insidental<span>SOSIAL</span></div>
+      <div class="program-detail">
+        <h4>Bakti Sosial &amp; Santunan</h4>
+        <p>Penggalangan dana dan pembagian santunan bagi yatim piatu serta masyarakat kurang mampu sekitar sekolah, terutama menjelang Ramadan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================= AGENDA ================= -->
+<section class="agenda" id="agenda">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="kicker"><span class="rule"></span><span>Kegiatan yang Akan Datang</span></div>
+        <h2>Jadwal kegiatan mendatang</h2>
+      </div>
+      <p>Cek jadwal berikut dan pastikan kamu hadir bersama IKRAMA.</p>
+    </div>
+    <div class="agenda-list">
+      <div class="agenda-item">
+        <div class="agenda-date"><strong>04</strong><span>September 2026</span></div>
+        <div class="agenda-title"><h4>Kegiatan Jumat Shodaqoh</h4><p>Pengumpulan sedekah siswa dan guru.</p></div>
+        <div class="agenda-place">SMK Negeri 1 Rangkasbitung</div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-date"><strong>04</strong><span>September 2026</span></div>
+        <div class="agenda-title"><h4>Kegiatan Jumat Bersih</h4><p>Membersihkan masjid, ruang sekretariat dan wilayah sekitar masjid.</p></div>
+        <div class="agenda-place">Masjid Al-Ikhlas SMK Negeri 1 Rangkasbitung</div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-date"><strong>25</strong><span>September 2026</span></div>
+        <div class="agenda-title"><h4>Kajian Jumat Berkah: Adab Menuntut Ilmu</h4><p>Terbuka untuk seluruh siswa, tidak hanya anggota IKRAMA.</p></div>
+        <div class="agenda-place">Aula Pancasila SMK Negeri 1 Rangkasbitung</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GALERI ================= -->
+<section class="galeri" id="galeri">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="kicker"><span class="rule"></span><span>Galeri Kegiatan</span></div>
+        <h2>Momen kebersamaan IKRAMA</h2>
+      </div>
+    </div>
+    <div class="gal-grid">
+      <div class="gal-cell"><svg viewBox="0 0 24 24" fill="none" stroke="#FBEAC0" stroke-width="1.4"><path d="M12 2 L12 8 M8 5 L16 5"/><path d="M4 12 h16 M4 12 c0 5 3.6 9 8 9 s8-4 8-9"/></svg><span>Sholat Berjamaah</span><p>Kebersamaan menjalankan sholat Dzuhur dan Ashar di masjid sekolah.</p></div>
+      <div class="gal-cell"><svg viewBox="0 0 24 24" fill="none" stroke="#FBEAC0" stroke-width="1.4"><path d="M4 5 h8 v14 H4 Z M12 5 h8 v14 h-8 Z"/></svg><span>Tahsin Qur'an</span><p>Kelas membaca Al-Qur'an sesuai kaidah tajwid bersama kakak pembina.</p></div>
+      <div class="gal-cell"><svg viewBox="0 0 24 24" fill="none" stroke="#FBEAC0" stroke-width="1.4"><circle cx="12" cy="8" r="3.4"/><path d="M5 20 c0-4 3.2-6 7-6 s7 2 7 6"/></svg><span>Kajian Rutin</span><p>Kajian Jumat Berkah seputar akhlak dan fiqih sehari-hari.</p></div>
+      <div class="gal-cell"><svg viewBox="0 0 24 24" fill="none" stroke="#FBEAC0" stroke-width="1.4"><path d="M12 3 l2.4 5.6 6 .6-4.5 4 1.3 5.8L12 16 6.8 19l1.3-5.8-4.5-4 6-.6Z"/></svg><span>PHBI</span><p>Peringatan Maulid Nabi, Isra Mi'raj, dan hari besar Islam lainnya.</p></div>
+      <div class="gal-cell"><svg viewBox="0 0 24 24" fill="none" stroke="#FBEAC0" stroke-width="1.4"><path d="M4 20 c1-6 4-9 8-9 s7 3 8 9"/><circle cx="12" cy="7" r="3"/></svg><span>Mabit</span><p>Malam Bina Iman dan Takwa, qiyamul lail bersama anggota.</p></div>
+      <div class="gal-cell"><svg viewBox="0 0 24 24" fill="none" stroke="#FBEAC0" stroke-width="1.4"><path d="M20 8 c0 5-4 8-8 11-4-3-8-6-8-11a4 4 0 0 1 8-1.6A4 4 0 0 1 20 8Z"/></svg><span>Baksos</span><p>Bakti sosial dan santunan yatim menjelang Ramadan.</p></div>
+      <div class="gal-cell"><svg viewBox="0 0 24 24" fill="none" stroke="#FBEAC0" stroke-width="1.4"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M4 15 l4-4 3 3 5-6 4 5"/></svg><span>Dokumentasi</span><p>Momen-momen kegiatan yang diabadikan tim Humas &amp; Media.</p></div>
+      <div class="gal-cell"><svg viewBox="0 0 24 24" fill="none" stroke="#FBEAC0" stroke-width="1.4"><path d="M12 3 v18 M6 8 l6-5 6 5 M6 16 l6 5 6-5"/></svg><span>Musyawarah</span><p>Rapat koordinasi pengurus dan evaluasi program kerja.</p></div>
+    </div>
+    <p class="gal-note">Foto dokumentasi kegiatan IKRAMA Periode 2026-2027.</p>
+  </div>
+</section>
+
+<!-- ================= GABUNG ================= -->
+<section class="join" id="gabung">
+  <svg class="hero-pattern-2" viewBox="0 0 200 200" fill="none">
+    <g stroke="#EFC763" stroke-width="1">
+      <rect x="50" y="50" width="100" height="100" transform="rotate(0 100 100)"/>
+      <rect x="50" y="50" width="100" height="100" transform="rotate(45 100 100)"/>
+    </g>
+  </svg>
+  <div class="wrap join-grid">
+    <div>
+      <div class="kicker" style="margin-bottom:18px;"><span class="rule" style="background:var(--gold-300);"></span><span style="color:var(--gold-300);font-weight:700;font-size:.85rem;">Formulir Pendaftaran</span></div>
+      <h2>Jadi bagian dari IKRAMA tahun ini.</h2>
+      <p class="lead">Terbuka untuk seluruh siswa muslim SMKN 1 Rangkasbitung dari semua jurusan dan pendaftaran hanya untuk kels X.</p>
+      <ul class="join-steps">
+        <li><b>1</b><span>Isi formulir pendaftaran di samping, atau temui pengurus ekstrakurikuler di sekitar sekolah.</span></li>
+        <li><b>2</b><span>Ikuti sesi ta'aruf (perkenalan) yang diadakan setiap awal semester.</span></li>
+      </ul>
+    </div>
+    <form class="contact">
+      <h3>Formulir Pendaftaran Anggota</h3>
+      <div class="field">
+        <label for="nama">Nama lengkap</label>
+        <input id="nama" type="text" placeholder="Nama sesuai Raport/Kartu Pelajar" required>
+      </div>
+      <div class="field">
+        <label for="kelas">Kelas &amp; Jurusan</label>
+        <input id="kelas" type="text" placeholder="Isi sesuai kelas dan jurusan kamu " required>
+      </div>
+      <div class="field">
+        <label for="wa">Nomor WhatsApp</label>
+        <input id="wa" type="tel" placeholder="isi nomor WhatsApp kamu" required>
+      </div>
+      <div class="field">
+        <label for="pesan">Alasan ingin bergabung (opsional)</label>
+        <textarea id="pesan" placeholder="Tulis alasanmu..."></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Kirim Pendaftaran</button>
+      <p class="form-note">Bersama Ikrama Membangun Generasi Beriman, Berilmu, dan Berakhlak Mulia.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ================= COVER PENUTUP ================= -->
+<section class="penutup">
+  <svg class="hero-pattern" viewBox="0 0 200 200" fill="none">
+    <g stroke="#EFC763" stroke-width="1">
+      <rect x="40" y="40" width="120" height="120" transform="rotate(0 100 100)"/>
+      <rect x="40" y="40" width="120" height="120" transform="rotate(45 100 100)"/>
+    </g>
+  </svg>
+  <div class="wrap penutup-content">
+  <img src="photo/Logo Ikrama.png" alt="Logo Ikrama" class="penutup-logo" id="penutupLogoImg" onerror="this.style.display='none';">
+    <p class="penutup-arabic">خَيْرُ النَّاسِ أَنْفَعُهُمْ لِلنَّاسِ</p>
+    <h2>Sebaik-baik manusia adalah<br>yang paling bermanfaat bagi sesama.</h2>
+    <p class="penutup-sub">Terima kasih telah mengenal IKRAMA — Ikatan Remaja Masjid Al-Ikhlas, SMK Negeri 1 Rangkasbitung. Mari bersama merawat masjid dan membina generasi yang beriman, berilmu, dan berakhlak mulia.</p>
+    <a href="#gabung" class="btn-primary">Gabung Bersama Kami</a>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <strong>IKRAMA</strong>
+        <p>Ikatan Remaja Masjid SMK Negeri 1 Rangkasbitung — memakmurkan masjid, membina generasi muda yang bertakwa dan peduli sesama.</p>
+      </div>
+      <div>
+        <h5>Jelajahi</h5>
+        <ul>
+          <li><a href="#tentang">Tentang Kami</a></li>
+          <li><a href="#program">Program Kegiatan</a></li>
+          <li><a href="#struktur">Struktur Organisasi</a></li>
+          <li><a href="#gabung">Formulir Pendaftaran</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Kontak</h5>
+        <ul>
+          <li>Masjid Al-Ikhlas - SMK Negeri 1 Rangkasbitung</li>
+          <li>Jl. Dewi Sartika No. 61 L , Rangkasbitung, Lebak, Banten, 42314</li>
+          <li>No Telepon: 0815-8268-826 & 0812-8616-8021</li>
+          <li>Youtube: <a href="https://youtube.com/@ikramaskensa6240?si=0IdNVigo2og0RGmj" target="_blank">IKRAMA SMKN 1 Rangkasbitung</a>
+          </li>
+          <li>Instagram: <a href="https://www.instagram.com/ikrama.skensa?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw==" target="_blank">@ikrama.skensa</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; <span id="year"></span> IKRAMA — SMK Negeri 1 Rangkasbitung.</span>
+      <span>Dibuat untuk memakmurkan masjid sekolah.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  function convertDriveLink(url){
+    if(!url || url.indexOf('drive.google.com') === -1) return url;
+    if(url.indexOf('googleusercontent.com') !== -1) return url; // sudah format yang benar
+    var m = url.match(/\/d\/([a-zA-Z0-9_-]{10,})/) || url.match(/[?&]id=([a-zA-Z0-9_-]{10,})/);
+    if(m && m[1]){
+      return 'https://lh3.googleusercontent.com/d/' + m[1];
+    }
+    return url;
+  }
+  document.querySelectorAll('.org-photo img, #brandLogoImg').forEach(function(img){
+    var src = img.getAttribute('src');
+    var fixed = convertDriveLink(src);
+    if(fixed !== src){ img.src = fixed; }
+  });
+
+  const SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwpQuFfqveo53K1Gpb8TnRd-QbIM1MmfXvF0swu1EfOIDO_aTO93JA6F718d3Xbutxa/exec';
+
+  window.tampilkanJumlahAnggota = function(data){
+    if(data && typeof data.total === 'number'){
+      document.getElementById('statAnggota').textContent = data.total + '+';
+    }
+  };
+
+  (function ambilJumlahAnggota(){
+    if(SHEET_WEB_APP_URL.includes('PASTE_URL')) return;
+    const s = document.createElement('script');
+    s.src = SHEET_WEB_APP_URL + '?callback=tampilkanJumlahAnggota';
+    document.body.appendChild(s);
+  })();
+
+  const jumlahKegiatan = document.querySelectorAll('.program-row').length;
+  const semuaTier = document.querySelectorAll('.org-tier');
+  const tierDivisi = semuaTier[semuaTier.length - 1];
+  const jumlahDivisi = tierDivisi ? tierDivisi.querySelectorAll('.org-card').length : 0;
+
+  document.getElementById('statKegiatan').textContent = jumlahKegiatan;
+
+  function handleLogoError(img){
+    img.style.display = 'none';
+    document.getElementById('brandLogoFallback').style.display = 'block';
+  }
+
+  const AVATAR_FALLBACK = "data:image/svg+xml;utf8," + encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">' +
+    '<rect width="100" height="100" fill="#123B60"/>' +
+    '</svg>'
+  );
+  function handlePhotoError(img){
+    img.onerror = null;
+    img.src = AVATAR_FALLBACK;
+  }
+
+  const header = document.getElementById('siteHeader');
+  const onScroll = () => {
+    if(window.scrollY > 40){ header.classList.add('scrolled'); }
+    else{ header.classList.remove('scrolled'); }
+  };
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+
+  const burger = document.getElementById('burgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      burger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+  });
+
+  // scrollspy
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav.links a');
+  const spy = () => {
+    let current = '';
+    sections.forEach(sec => {
+      const top = sec.offsetTop - 120;
+      if(window.scrollY >= top){ current = sec.getAttribute('id'); }
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  };
+  window.addEventListener('scroll', spy);
+  spy();
+
+  document.querySelector('form.contact').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    if(SHEET_WEB_APP_URL.includes('PASTE_URL')){
+      alert('Formulir belum dihubungkan ke Google Sheet. Isi SHEET_WEB_APP_URL di dalam kode terlebih dahulu.');
+      return;
+    }
+
+    const payload = {
+      nama:  document.getElementById('nama').value,
+      kelas: document.getElementById('kelas').value,
+      wa:    document.getElementById('wa').value,
+      pesan: document.getElementById('pesan').value
+    };
+
+    fetch(SHEET_WEB_APP_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    }).then(() => {
+      alert('Pendaftaran berhasil dikirim. Terima kasih telah mendaftar IKRAMA, Silahkan Tunggu informasi lebih lanjut!');
+      e.target.reset();
+    }).catch(() => {
+      alert('Gagal mengirim pendaftaran. Silakan coba lagi atau hubungi pengurus langsung.');
+    });
+  });
+</script>
+</body>
+</html>
